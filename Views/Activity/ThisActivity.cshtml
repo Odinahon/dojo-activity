@@ -1,0 +1,13 @@
+
+<h2>@ViewBag.activity.Title' Activity</h2>
+<h4>Date: @ViewBag.activity.Date.ToString("MM/dd/yyyy");</h4>
+<h4>Description: @ViewBag.activity.Description</h4>
+
+<h4>Participants:</h4>
+<ul>
+    <br> @foreach(var u in ViewBag.activity.Users){
+    <li>@u.User.FirstName</li>
+    }
+</ul>
+
+

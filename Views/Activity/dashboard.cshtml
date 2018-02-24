@@ -1,0 +1,50 @@
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+@model IEnumerable<Exam.Models.Activity>
+<h2>Dojo Activity Center</h2>
+<p>Welcome, @ViewBag.UserName! </p>
+<p><a href="/logout">Log off</a></p>
+<div>
+  <form action="/activitypage">
+    <button>Add new Activity!</button>
+</form>  
+</div>
+<p></p>
+<div>
+<table style="width:50%">
+    <tr>
+        <th>Activity</th>
+        <th>Date and Time</th>
+        <th>Duration</th>
+        <th>Event Coordinator</th>
+        <th>Number of Participants</th>
+        <th>Actiions</th>
+    </tr>
+
+@foreach (var act in Model){var flag =false;
+<tr>
+    <td><a href ="thisactivity/@act.ActivityId">@act.Title</a></td>
+    <td>@act.Time</td>
+    <td>@act.Duration</td>
+    <td>@ViewBag.coor.FirstName</td>
+    <td>@act.Users.Count</td>
+    @foreach (var u in @act.Users){ @if(@u.UserId==@ViewBag.session && @u.ActivityId==@act.ActivityId){flag =true;}} @if(@act.UserId==@ViewBag.session){
+        <td><a href="delete/@act.ActivityId">Delete</a></td>
+        }else if(flag==false){
+            <td><a href="Join/@act.ActivityId">Join</a></td>
+        }else if(flag==true){
+            <td><a href="Leave/@act.ActivityId">Leave</a></td>
+        }
+        </tr>
+        }
+ 
+
+
+
+
+</table>
+</div>
+
